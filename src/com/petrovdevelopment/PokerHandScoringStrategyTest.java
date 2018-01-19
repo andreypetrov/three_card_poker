@@ -1,50 +1,51 @@
 package com.petrovdevelopment;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PokerHandScoringStrategyTest {
-    @org.junit.jupiter.api.Test
-    void testCompare() {
-        Hand hand1 = new Hand(1, new String[]{"4h", "3h", "2h"});
-        Hand hand2 = new Hand(2, new String[]{"3h", "4h", "5h"});
 
-        assertEquals(-1, PokerHandScoringStrategy.compare(hand1, hand2));
+    @Test
+    void testCalculatePairRank() {
+        Hand hand = new Hand(1, new String[]{"2h", "7h", "7d"});
+        assertEquals(7, PokerHandScoringStrategy.calculatePairRank(hand));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testCalculateHandScoreStraightFlush() {
         Hand hand = new Hand(1, new String[]{"2h", "3h", "4h"});
-        assertEquals(HandScore.STRAIGHT_FLUSH, hand.getHandScore());
+        assertEquals(HandScore.STRAIGHT_FLUSH, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testThreeOfAKind() {
         Hand hand = new Hand(1, new String[]{"2h", "2d", "2c"});
-        assertEquals(HandScore.THREE_OF_A_KIND, hand.getHandScore());
+        assertEquals(HandScore.THREE_OF_A_KIND, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testStraight() {
         Hand hand = new Hand(1, new String[]{"3d", "2h", "4h"});
-        assertEquals(HandScore.STRAIGHT, hand.getHandScore());
+        assertEquals(HandScore.STRAIGHT, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testFlush() {
         Hand hand = new Hand(1, new String[]{"Qh", "7h", "Ah"});
-        assertEquals(HandScore.FLUSH, hand.getHandScore());
+        assertEquals(HandScore.FLUSH, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
-       @org.junit.jupiter.api.Test
+    @Test
     void testPair() {
         Hand hand = new Hand(1, new String[]{"Td", "Ah", "Th"});
-        assertEquals(HandScore.PAIR, hand.getHandScore());
+        assertEquals(HandScore.PAIR, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testHighCard() {
         Hand hand = new Hand(1, new String[]{"Td", "Ah", "2s"});
-        assertEquals(HandScore.HIGH_CARD, hand.getHandScore());
+        assertEquals(HandScore.HIGH_CARD, PokerHandScoringStrategy.calculateHandScore(hand));
     }
 
 

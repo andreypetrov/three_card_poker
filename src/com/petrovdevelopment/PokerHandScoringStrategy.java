@@ -1,26 +1,19 @@
 package com.petrovdevelopment;
 
 /**
- * Methods required to score cards
+ * Methods required to score and compare hands of cards
  *
  */
 public class PokerHandScoringStrategy {
 
     /**
-     * Comparison based on standard 3-cards-poker scoring method.
-     * This and other underlying implementation methods require cards in hands to be sorted in ascending order.
-     * @param hand1
-     * @param hand2
+     * calculate the hand score of a hand.
+     * Method starts with prefix calculate instead of get to underline the fact that there is more work to be done, than simply fetching a score.
+     * In a mobile application such method would be good to execute not on the UI thread.
+     *
+     * @param hand
      * @return
      */
-    public static int compare(Hand hand1, Hand hand2) {
-        HandScore score1 = hand1.getHandScore();
-        HandScore score2 = hand2.getHandScore();
-        if (score1 != score2) return score1.value - score2.value;
-        else if (score1 == HandScore.PAIR) return compareHandsWithPairs(hand1, hand2);
-        else return compareHighestCards(hand1, hand2);
-    }
-
     public static HandScore calculateHandScore(Hand hand) {
         //we could store locally some of the results of those boolean methods for optimization,
         //but that would reduce readability a bit, and in hands with just a few cards performance is unlikely critical, so optimization would be premature.
@@ -30,6 +23,21 @@ public class PokerHandScoringStrategy {
         if (isFlush(hand)) return HandScore.FLUSH;
         if (isPair(hand)) return HandScore.PAIR;
         return HandScore.HIGH_CARD;
+    }
+
+    /**
+     * get the rank of the first pair in a hand of cards. In three cards poker there is only one
+     *
+     * @param hand
+     * @return rank of a pair or -1 if there is no pair
+     */
+    public static int calculatePairRank(Hand hand) {
+        for (int i = 0; i < hand.size() - 1; i++) {
+            for (int j = i + 1; j < hand.size(); j++) {
+                if (hand.getCard(i).getRank() == hand.getCard(j).getRank()) return hand.getCard(i).getRank();
+            }
+        }
+        return -1;
     }
 
     /**
@@ -67,45 +75,9 @@ public class PokerHandScoringStrategy {
     }
 
     private static boolean isPair(Hand hand) {
-        return pairRank(hand) != -1;
+        return calculatePairRank(hand) != -1;
     }
 
-    private static int compareHandsWithPairs(Hand hand1, Hand hand2) {
-        int pairRank1 = pairRank(hand1);
-        int pairRank2 = pairRank(hand2);
-        if (pairRank1 == pairRank2) return compareHighestCards(hand1, hand2);
-        return pairRank1 - pairRank2;
-    }
 
-    /**
-     * get the rank of the first pair in a hand of cards. In three cards poker there is only one
-     *
-     * @param hand
-     * @return rank of a pair or -1 if there is no pair
-     */
-    private static int pairRank(Hand hand) {
-        for (int i = 0; i < hand.size() - 1; i++) {
-            for (int j = i + 1; j < hand.size(); j++) {
-                if (hand.getCard(i).getRank() == hand.getCard(j).getRank()) return hand.getCard(i).getRank();
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * In case of a category tie, the hand with highest card will win.
-     * Logic should work for 5 cards hands too.
-     * @param hand1
-     * @param hand2
-     * @return
-     */
-    private static int compareHighestCards(Hand hand1, Hand hand2) {
-        for (int i = hand1.size() - 1; i >= 0; i--) {
-            if (hand1.getCard(i).compareTo(hand2.getCard(i)) != 0) {
-                return hand1.getCard(i).compareTo(hand2.getCard(i));
-            }
-        }
-        return 0;
-    }
 
 }

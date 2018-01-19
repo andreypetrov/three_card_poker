@@ -1,11 +1,12 @@
 package com.petrovdevelopment;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * contains sorted by rank array of cards
  */
-public class Hand implements Comparable<Hand> {
+public class Hand {
     private final int playerId;
     private final Card[] cards;
     private HandScore handScore;
@@ -19,10 +20,9 @@ public class Hand implements Comparable<Hand> {
         Arrays.sort(cards);
     }
 
-
     /**
      * Lazy initialized handscore first time we access it
-     *
+     * Since a hand's list of cards is immutable and every card is immutable itself, this means hand score will never change.
      * @return
      */
     public HandScore getHandScore() {
@@ -30,6 +30,26 @@ public class Hand implements Comparable<Hand> {
         return handScore;
     }
 
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    /**
+     * calling method size() instead of getSize() to match standard java notation.
+     * @return
+     */
+    public int size() {
+        return cards.length;
+    }
+
+    public Card getCard(int index) {
+        return cards[index];
+    }
+
+    /**
+     * Needed only for debugging purposes
+     * @return
+     */
     @Override
     public String toString() {
         String result = String.valueOf(playerId);
@@ -37,23 +57,6 @@ public class Hand implements Comparable<Hand> {
             result += " " + card;
         }
         return result;
-    }
-
-    @Override
-    public int compareTo(Hand other) {
-        return PokerHandScoringStrategy.compare(this, other);
-    }
-
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    public int size() {
-        return cards.length;
-    }
-
-    public Card getCard(int index) {
-        return cards[index];
     }
 
 }

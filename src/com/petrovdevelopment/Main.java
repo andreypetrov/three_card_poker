@@ -1,9 +1,6 @@
 package com.petrovdevelopment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 //TODO If time permits add cheating validation of input to make sure there are no repeating cards, e.g. Tc, Tc or 5d, 5d?
 public class Main {
@@ -14,10 +11,11 @@ public class Main {
 	    Scanner in = new Scanner(System.in);
         Hand[] hands = createHandsFromInput(in);
         in.close();
-        List<Hand> winners = selectWinners(hands);
+        PokerHandComparator comparator = new PokerHandComparator();
+        List<Hand> winners = selectWinners(hands, comparator);
         System.out.println(toString(winners));
     }
-    
+
     private static Hand[] createHandsFromInput(Scanner in) {
         int playersCount = in.nextInt();
         if (!isValid(playersCount)) throw new IllegalArgumentException("Invalid player count");
@@ -35,13 +33,13 @@ public class Main {
      * @param hands
      * @return
      */
-    private static List<Hand> selectWinners(Hand[] hands) {
+    private static List<Hand> selectWinners(Hand[] hands, Comparator<Hand> comparator) {
         List<Hand> winners = new ArrayList<>();
         winners.add(hands[0]);
         for (int i = 1; i < hands.length; i++) {
-            if (hands[i].compareTo(winners.get(0)) == 0) { //tied with current winner, so add to winning list
+            if (comparator.compare(hands[i], winners.get(0)) == 0) { //tied with current winner, so add to winning list
                 winners.add(hands[i]);
-            } else if (hands[i].compareTo(winners.get(0)) > 0) { //found new winner, clean previous
+            } else if (comparator.compare(hands[i],winners.get(0)) > 0) { //found new winner, clean previous
                 winners.clear();
                 winners.add(hands[i]);
             }
