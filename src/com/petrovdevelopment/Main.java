@@ -17,9 +17,7 @@ public class Main {
         List<Hand> winners = selectWinners(hands);
         System.out.println(toString(winners));
     }
-
-
-
+    
     private static Hand[] createHandsFromInput(Scanner in) {
         int playersCount = in.nextInt();
         if (!isValid(playersCount)) throw new IllegalArgumentException("Invalid player count");

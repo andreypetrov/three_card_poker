@@ -12,9 +12,40 @@ class PokerHandScoringStrategyTest {
     }
 
     @org.junit.jupiter.api.Test
-    void testCalculateHandScore() {
+    void testCalculateHandScoreStraightFlush() {
         Hand hand = new Hand(1, new String[]{"2h", "3h", "4h"});
         assertEquals(HandScore.STRAIGHT_FLUSH, hand.getHandScore());
     }
+
+    @org.junit.jupiter.api.Test
+    void testThreeOfAKind() {
+        Hand hand = new Hand(1, new String[]{"2h", "2d", "2c"});
+        assertEquals(HandScore.THREE_OF_A_KIND, hand.getHandScore());
+    }
+
+    @org.junit.jupiter.api.Test
+    void testStraight() {
+        Hand hand = new Hand(1, new String[]{"3d", "2h", "4h"});
+        assertEquals(HandScore.STRAIGHT, hand.getHandScore());
+    }
+
+    @org.junit.jupiter.api.Test
+    void testFlush() {
+        Hand hand = new Hand(1, new String[]{"Qh", "7h", "Ah"});
+        assertEquals(HandScore.FLUSH, hand.getHandScore());
+    }
+
+       @org.junit.jupiter.api.Test
+    void testPair() {
+        Hand hand = new Hand(1, new String[]{"Td", "Ah", "Th"});
+        assertEquals(HandScore.PAIR, hand.getHandScore());
+    }
+
+    @org.junit.jupiter.api.Test
+    void testHighCard() {
+        Hand hand = new Hand(1, new String[]{"Td", "Ah", "2s"});
+        assertEquals(HandScore.HIGH_CARD, hand.getHandScore());
+    }
+
 
 }

@@ -1,17 +1,15 @@
 package com.petrovdevelopment;
 
 public class Card implements Comparable<Card> {
+    public enum Suite {DIAMONDS, HEARTS, CLUBS, SPADES }
+
     public static final int PRIMARY_ACE_RANK = 14;
     public static final int SECONDARY_ACE_RANK = 1;
-
     private static final int CARD_INPUT_LENGTH = 2;
 
 
-    enum Suite {DIAMONDS, HEARTS, CLUBS, SPADES }
-
     private final Suite suite;
     private final int rank;
-
 
     public Card(String card) {
         if (card.length()!= CARD_INPUT_LENGTH) {
@@ -19,7 +17,6 @@ public class Card implements Comparable<Card> {
         }
         rank = toRank(card.charAt(0));
         suite = toSuite(card.charAt(1));
-
     }
 
     private Suite toSuite(char c) {
