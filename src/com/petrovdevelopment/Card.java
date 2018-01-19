@@ -2,7 +2,7 @@ package com.petrovdevelopment;
 
 public class Card implements Comparable<Card> {
     public static final int PRIMARY_ACE_RANK = 14;
-    public static final int SECONDARY_ACE_RANK = 2;
+    public static final int SECONDARY_ACE_RANK = 1;
 
     private static final int CARD_INPUT_LENGTH = 2;
 
