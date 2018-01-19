@@ -3,14 +3,13 @@ package com.petrovdevelopment;
 import java.util.Arrays;
 
 /**
- * contains sorted array of cards by rank and suite, although suite sorting is irrelevant
+ * contains sorted by rank array of cards
  */
-public class Hand implements Comparable<Hand>{
+public class Hand implements Comparable<Hand> {
     private final int playerId;
-
+    private final Card[] cards;
     private HandScore handScore;
 
-    Card[] cards;
     public Hand(int playerId, String[] handInput) {
         this.playerId = playerId;
         cards = new Card[handInput.length];
@@ -20,8 +19,10 @@ public class Hand implements Comparable<Hand>{
         Arrays.sort(cards);
     }
 
+
     /**
      * Lazy initialized handscore first time we access it
+     *
      * @return
      */
     public HandScore getHandScore() {
@@ -46,4 +47,13 @@ public class Hand implements Comparable<Hand>{
     public int getPlayerId() {
         return playerId;
     }
+
+    public int size() {
+        return cards.length;
+    }
+
+    public Card getCard(int index) {
+        return cards[index];
+    }
+
 }
