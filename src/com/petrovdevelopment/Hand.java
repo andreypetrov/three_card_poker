@@ -10,6 +10,7 @@ public class Hand implements Comparable<Hand>{
 
     private HandScore handScore;
 
+
     Card[] cards;
     public Hand(int playerId, String[] handInput) {
         this.playerId = playerId;
@@ -17,7 +18,7 @@ public class Hand implements Comparable<Hand>{
         for (int i = 0; i < handInput.length; i++) {
             cards[i] = new Card(handInput[i]);
         }
-        Arrays.sort(cards); 
+        Arrays.sort(cards);
     }
 
     /**
