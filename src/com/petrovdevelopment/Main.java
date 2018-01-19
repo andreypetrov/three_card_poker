@@ -40,6 +40,8 @@ public class Main {
             if (comparator.compare(hands[i], winners.get(0)) == 0) { //tied with current winner, so add to winning list
                 winners.add(hands[i]);
             } else if (comparator.compare(hands[i],winners.get(0)) > 0) { //found new winner, clean previous
+                //even though implementation of java's List.clear is iterating over the winners array, complexity is still O(hands.length)
+                //because every element of hands array is touched worst case twice - once added to winners array, and once removed
                 winners.clear();
                 winners.add(hands[i]);
             }
