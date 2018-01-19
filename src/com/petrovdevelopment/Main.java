@@ -15,9 +15,6 @@ public class Main {
         Hand[] hands = createHandsFromInput(in);
         in.close();
         List<Hand> winners = selectWinners(hands);
-        for (Hand h : winners) {
-            System.out.println(h);
-        }
         System.out.println(toString(winners));
     }
 

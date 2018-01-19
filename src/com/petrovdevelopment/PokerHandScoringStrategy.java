@@ -85,7 +85,7 @@ public class PokerHandScoringStrategy {
      */
     private static int pairRank(Hand hand) {
         for (int i = 0; i < hand.cards.length - 1; i++) {
-            for (int j = i + 1; j < hand.cards.length - 1; j++) {
+            for (int j = i + 1; j < hand.cards.length; j++) {
                 if (hand.cards[i].getRank() == hand.cards[j].getRank()) return hand.cards[i].getRank();
             }
         }
