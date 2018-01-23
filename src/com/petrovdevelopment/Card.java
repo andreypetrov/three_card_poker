@@ -48,7 +48,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return "r:" + rank + " s:" + suite;
+        return "r:" + rank.ordinal() + " s:" + suite.ordinal();
     }
 
     public Suite getSuite() {
