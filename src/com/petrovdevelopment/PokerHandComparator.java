@@ -13,18 +13,18 @@ public class PokerHandComparator implements Comparator<Hand>{
      */
     @Override
     public int compare(Hand hand1, Hand hand2) {
-        HandScore score1 = hand1.getHandScore();
-        HandScore score2 = hand2.getHandScore();
+        HandScore score1 = hand1.getScore();
+        HandScore score2 = hand2.getScore();
         if (score1 != score2) return score1.value - score2.value;
         else if (score1 == HandScore.PAIR) return compareHandsWithPairs(hand1, hand2);
         else return compareHighestCards(hand1, hand2);
     }
 
     private static int compareHandsWithPairs(Hand hand1, Hand hand2) {
-        int pairRank1 = PokerHandScoringStrategy.calculatePairRank(hand1);
-        int pairRank2 = PokerHandScoringStrategy.calculatePairRank(hand2);
+        Card.Rank pairRank1 = hand1.calculatePairRank();
+        Card.Rank pairRank2 = hand2.calculatePairRank();
         if (pairRank1 == pairRank2) return compareHighestCards(hand1, hand2);
-        return pairRank1 - pairRank2;
+        return pairRank1.ordinal() - pairRank2.ordinal();
     }
 
     /**
