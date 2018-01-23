@@ -31,6 +31,12 @@ class HandTest {
     }
 
     @Test
+    void testStraightWithAceAsOne() {
+        Hand hand = new Hand(1, new String[]{"Ad", "2h", "3s"});
+        assertEquals(HandScore.STRAIGHT, hand.getScore());
+    }
+
+    @Test
     void testFlush() {
         Hand hand = new Hand(1, new String[]{"Qh", "7h", "Ah"});
         assertEquals(HandScore.FLUSH, hand.getScore());

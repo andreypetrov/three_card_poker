@@ -28,7 +28,7 @@ public class Card implements Comparable<Card> {
                 default: throw new IllegalArgumentException("illegal card rank");
             }
         }
-    };
+    }
 
     private final Suite suite;
     private final Rank rank;

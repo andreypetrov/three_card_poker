@@ -2,14 +2,17 @@ package com.petrovdevelopment;
 
 import java.util.Comparator;
 
+
+ /**
+ *  Comparator based on standard 3-cards-poker scoring. Requires hands to contain sorted cards in ascending order.
+ */
 public class PokerHandComparator implements Comparator<Hand>{
 
     /**
-     * Comparison based on standard 3-cards-poker scoring method.
-     * This and other underlying implementation methods require cards in hands to be sorted in ascending order.
-     * @param hand1
-     * @param hand2
-     * @return
+     * Requires hands to contain sorted cards in ascending order.
+     * @param hand1 first hand
+     * @param hand2 second hand
+     * @return order depends on sign of returned integer
      */
     @Override
     public int compare(Hand hand1, Hand hand2) {
@@ -30,9 +33,9 @@ public class PokerHandComparator implements Comparator<Hand>{
     /**
      * In case of a category tie, the hand with highest card will win.
      * Logic should work for 5 cards hands too.
-     * @param hand1
-     * @param hand2
-     * @return
+     * @param hand1 first hand
+     * @param hand2 second hand
+     * @return order depends on sign of returned integer
      */
     private static int compareHighestCards(Hand hand1, Hand hand2) {
         for (int i = hand1.size() - 1; i >= 0; i--) {

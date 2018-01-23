@@ -1,5 +1,10 @@
 package com.petrovdevelopment;
 
+/**
+ * Enum containing all possible scores and for every score a boolean whether the hand matches that score or not
+ * This allows us theoretically in the future to extend scores.
+ * Current implementation depends on ordering of enum values
+ */
 public enum HandScore implements ScoreMatch {
     HIGH_CARD(100) {
         @Override
@@ -33,10 +38,9 @@ public enum HandScore implements ScoreMatch {
 
             if (hand.getCard(n - 1).getRank().ordinal() - hand.getCard(n - 2).getRank().ordinal() == 1) return true;
             //check if ACE can be used as one instead
-            if (hand.getCard(n - 1).getRank() == Card.Rank.ACE
-                    && hand.getCard(0).getRank().ordinal() - Card.Rank.ONE.ordinal() == 1) return true;
+            return hand.getCard(n - 1).getRank() == Card.Rank.ACE
+                    && hand.getCard(0).getRank().ordinal() - Card.Rank.ONE.ordinal() == 1;
 
-            return false;
         }
     },
     THREE_OF_A_KIND(500) {
@@ -57,7 +61,7 @@ public enum HandScore implements ScoreMatch {
         }
     };
 
-    int value;
+    final int value;
     HandScore(int value) {
         this.value = value;
     }
