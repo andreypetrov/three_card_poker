@@ -6,7 +6,7 @@ import java.util.*;
  * We make an assumption that we are allowing repeating cards e.g. two kings of spades.
  * Assumption is based on the fact that if we have 23 players (allowed input) then there is no way that we can fill their hands with only one deck of cards (3x23 > 52)
  * If this assumption is not valid then we could add input validation to make sure there are no card duplicates.
- * Methods are kept short and hoepfully readable
+ * Methods are kept short and hopefully readable
  */
 public class Main {
     private static final int MIN_PLAYER_COUNT = 1;
