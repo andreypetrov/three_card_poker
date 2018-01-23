@@ -1,4 +1,4 @@
-package com.petrovdevelopment;
+package com.mark43;
 
 public class Card implements Comparable<Card> {
     private static final int CARD_INPUT_LENGTH = 2;

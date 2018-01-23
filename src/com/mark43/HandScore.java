@@ -1,4 +1,4 @@
-package com.petrovdevelopment;
+package com.mark43;
 
 /**
  * Enum containing all possible scores and for every score a boolean whether the hand matches that score or not
